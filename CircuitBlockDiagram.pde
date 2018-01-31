@@ -1,9 +1,9 @@
-final int NUM_OF_NODES = 2;
+final int NUM_OF_NODES = 5;
 final int NODE_WIDTH = 180;
 final int NODE_HEIGHT = 150;
 final int NODE_BORDER_THICKNESS = 5;
 
-final int NUM_OF_CONNECTORS = 1;
+final int NUM_OF_CONNECTORS = 6;
 final int CONNECTOR_THICKNESS = 5;
 
 final float EXPAND_MOVE_STEP = 20.0; 
@@ -49,14 +49,24 @@ void draw() {
 }
 
 void CreateNodes() {
-  nodes[0] = new Node(0, 200, 200, NODE_WIDTH, NODE_HEIGHT, "ENCODER SYSTEM");
+  nodes[0] = new Node(0, 200, 200, NODE_WIDTH, NODE_HEIGHT, "MOTORS & ENCODERS SYSTEM");
   nodes[0].AddLink("https://www.servocity.com/118-rpm-hd-premium-planetary-gear-motor-w-encoder");
   nodes[0].AddLink("https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide/hardware-overview-pro-micro");
   nodes[1] = new Node(1, 600, 400, NODE_WIDTH, NODE_HEIGHT, "RASPBERRY PI");
+  nodes[1].AddLink("https://i.stack.imgur.com/sVvsB.jpg");
+  nodes[2] = new Node(2, 1000, 200, NODE_WIDTH, NODE_HEIGHT, "GPS MODULE");
+  nodes[2].AddLink("https://www.robotshop.com/en/uart-neo-7m-c-gps-module.html");
+  nodes[3] = new Node(3, 600, 600, NODE_WIDTH, NODE_HEIGHT, "16-CHANNEL PWM DRIVER");
+  nodes[4] = new Node(4, 200, 400, NODE_WIDTH, NODE_HEIGHT, "MOTOR DRIVERS");
 }
 
 void CreateConnectors() {
-  connectors[0] = new Connector(0, nodes[0],nodes[1],1,3,0, "USB", 0);
+  connectors[0] = new Connector(0, nodes[0],nodes[1],1,0,0, "USB", 0, 2);
+  connectors[1] = new Connector(1, nodes[1],nodes[2],1,3,0, "UART", 0, 3);
+  connectors[2] = new Connector(2, nodes[1],nodes[3],2,0,0, "i2c", 1, 1);
+  connectors[3] = new Connector(3, nodes[4],nodes[3],2,3,2, "PWM", 1, 2);
+  connectors[4] = new Connector(4, nodes[0],nodes[4],2,0,1, "PWR", 0, 1);
+  connectors[5] = new Connector(5, nodes[4],nodes[1],1,3,0, "GPIO", 0, 1);
 }
 
 void UpdateNodes() {
