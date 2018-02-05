@@ -27,6 +27,10 @@ class Connector {
     
     
     switch(node1_exit_position) {
+      case 0:
+        node1_x = parent_node1.x_coord;
+        node1_y = parent_node1.y_coord-(NODE_HEIGHT/2); 
+        break;
       case 1:
         node1_x = parent_node1.x_coord+(NODE_WIDTH/2);
         node1_y = parent_node1.y_coord;
@@ -42,6 +46,10 @@ class Connector {
         node2_x = parent_node2.x_coord;
         node2_y = parent_node2.y_coord-(NODE_HEIGHT/2);
         break;
+      case 2:
+        node2_x = parent_node2.x_coord;
+        node2_y = parent_node2.y_coord+(NODE_HEIGHT/2);
+        break;
       case 3:
         node2_x = parent_node2.x_coord-(NODE_WIDTH/2);
         node2_y = parent_node2.y_coord;
@@ -56,7 +64,7 @@ class Connector {
         line_colour = color(255, 87, 87, 255);
         break;
       case 2:
-        line_colour = color(255, 198, 77, 255);
+        line_colour = color(255, 133, 51, 255);
     }
   }
 
@@ -113,20 +121,20 @@ class Connector {
             line(node1_x, node1_y, node2_x, node1_y);
             line(node2_x, node1_y, node2_x, node2_y);
             if(label_position == 0) {
-              text(connector_label, node2_x, node1_y - LABEL_Y_OFFSET);
+              text(connector_label, x_midpoint, node1_y - LABEL_Y_OFFSET);
             }
             else {
-              text(connector_label, node2_x, node1_y + LABEL_Y_OFFSET);
+              text(connector_label, x_midpoint, node1_y + LABEL_Y_OFFSET);
             }
           }
           else {
             line(node1_x, node1_y, node1_x, node2_y);
             line(node1_x, node2_y, node2_x, node2_y);  
             if(label_position == 0) {
-              text(connector_label, node1_x, node2_y - LABEL_Y_OFFSET);
+              text(connector_label, x_midpoint, node2_y - LABEL_Y_OFFSET);
             }
             else {
-              text(connector_label, node1_x, node2_y + LABEL_Y_OFFSET);
+              text(connector_label, x_midpoint, node2_y + LABEL_Y_OFFSET);
             }
           }
           break;
